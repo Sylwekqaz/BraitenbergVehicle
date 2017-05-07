@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000013053834502}
   - 212: {fileID: 212000013201406568}
+  - 50: {fileID: 50000010930966244}
   m_Layer: 0
   m_Name: LeftWheel
   m_TagString: Untagged
@@ -102,6 +103,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012888624182}
   - 212: {fileID: 212000012692549152}
+  - 50: {fileID: 50000010356376230}
   m_Layer: 0
   m_Name: RightWheel
   m_TagString: Untagged
@@ -209,6 +211,40 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!50 &50000010356376230
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012971344336}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!50 &50000010930966244
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010388532040}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &61000010176589908
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -235,6 +271,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 5
+  LeftWheel: {fileID: 1000010388532040}
+  RightWheel: {fileID: 1000012971344336}
+  LeftAntena: {fileID: 1000012906112968}
+  RightAntena: {fileID: 1000012746024418}
 --- !u!212 &212000012217096978
 SpriteRenderer:
   m_ObjectHideFlags: 1
