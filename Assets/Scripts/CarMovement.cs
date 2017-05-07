@@ -30,8 +30,13 @@ namespace Assets.Scripts
         // Update is called once per frame
         void Update()
         {
-            LeftWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed* GetAntenaValue(RightAntena , GoodPoints);
-            RightWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed * GetAntenaValue(LeftAntena, GoodPoints);
+            var leftWheelMultiply = (GetAntenaValue(RightAntena, GoodPoints) - GetAntenaValue(RightAntena, BadPoints));
+            var rightWheelMultiply = (GetAntenaValue(LeftAntena, GoodPoints) - GetAntenaValue(LeftAntena, BadPoints));
+
+            Debug.LogFormat("{0}   :    {1}", leftWheelMultiply, rightWheelMultiply);
+
+            LeftWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed* leftWheelMultiply;
+            RightWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed * rightWheelMultiply;
         }
 
         float GetAntenaValue(GameObject antena, GameObject pointsHolder)
