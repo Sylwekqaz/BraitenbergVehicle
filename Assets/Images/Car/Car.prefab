@@ -68,6 +68,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012515171142}
   - 50: {fileID: 50000010299198462}
+  - 114: {fileID: 114000011801672918}
+  - 61: {fileID: 61000010176589908}
   m_Layer: 0
   m_Name: Car
   m_TagString: Untagged
@@ -198,7 +200,7 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012752139522}
   m_UseAutoMass: 1
-  m_Mass: 1
+  m_Mass: 5.4268
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -207,6 +209,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &61000010176589908
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012752139522}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.00000003973643, y: 0.028503697}
+  serializedVersion: 2
+  m_Size: {x: 0.87891215, y: 0.68605006}
+--- !u!114 &114000011801672918
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012752139522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 027d2b514fc4683438959ac313586b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 5
 --- !u!212 &212000012217096978
 SpriteRenderer:
   m_ObjectHideFlags: 1
