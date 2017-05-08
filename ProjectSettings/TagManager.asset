@@ -43,3 +43,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3789315039
+    locked: 0
+  - name: Points
+    uniqueID: 1740170473
+    locked: 0
+  - name: Car
+    uniqueID: 2777907905
+    locked: 0
