@@ -17,11 +17,24 @@ namespace Assets.Scripts
         public GameObject BadPoints;
         public GameObject GoodPoints;
 
+        public int Points;
+
 
         // OnTriggerEnter2D is called when the Collider2D other enters the trigger (2D physics only)
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            Debug.Log(collision.gameObject.tag);
+            if (collision.gameObject.CompareTag("GoodPoint"))
+            {
+                Points++;
+                Destroy(collision.gameObject);
+            }
+
+
+            if (collision.gameObject.CompareTag("BadPoint"))
+            {
+                Points--;
+                Destroy(collision.gameObject);
+            }
         }
 
         // Use this for initialization
@@ -46,7 +59,7 @@ namespace Assets.Scripts
             var antenaPosition = antena.transform.position;
 
             return pointsHolder
-                .transform.Cast<Transform>()
+                .transform.Cast<Transform>() //foreach
                 .Sum(point => 1 / (point.position - antenaPosition).sqrMagnitude);
         }
     }
