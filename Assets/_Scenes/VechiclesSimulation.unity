@@ -126,7 +126,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 194920341}
-  - 114: {fileID: 194920340}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -134,23 +133,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &194920340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 194920339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 417353305325a0a4486e7ac09ef20ec7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GoodPointsHolder: {fileID: 410868213}
-  BadPointsHolder: {fileID: 173164394}
-  GoodPoint: {fileID: 1000011394888264, guid: d1b1e3e3591f6364a8f3361aed608232, type: 2}
-  BadPoint: {fileID: 1000011917877974, guid: 87b1caa9000eec24eabff8b2611d6ba6, type: 2}
-  BadPointCount: 200
-  GoodPointCount: 200
 --- !u!4 &194920341
 Transform:
   m_ObjectHideFlags: 0
@@ -208,7 +190,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 33dd3d6f7db23b749b716ca1a24aa6c6, type: 2}
+  - {fileID: 2100000, guid: 11729fa27a679db4fbeedeff9e7512fe, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -565,6 +547,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1857016242}
+  - 114: {fileID: 1857016243}
   m_Layer: 0
   m_Name: Points
   m_TagString: Untagged
@@ -587,6 +570,23 @@ Transform:
   - {fileID: 173164395}
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!114 &1857016243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1857016241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417353305325a0a4486e7ac09ef20ec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GoodPointsHolder: {fileID: 410868213}
+  BadPointsHolder: {fileID: 173164394}
+  GoodPoint: {fileID: 1000011394888264, guid: d1b1e3e3591f6364a8f3361aed608232, type: 2}
+  BadPoint: {fileID: 1000011917877974, guid: 87b1caa9000eec24eabff8b2611d6ba6, type: 2}
+  BadPointCount: 200
+  GoodPointCount: 200
 --- !u!1 &1930159414
 GameObject:
   m_ObjectHideFlags: 0
