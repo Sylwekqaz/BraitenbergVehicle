@@ -45,8 +45,10 @@ namespace Assets.Scripts
         // Update is called once per frame
         void Update()
         {
-            var leftWheelMultiply = (GetAntenaValue(RightAntena, GoodPoints) - 0.5f * GetAntenaValue(RightAntena, BadPoints));
-            var rightWheelMultiply = (GetAntenaValue(LeftAntena, GoodPoints) - 0.5f * GetAntenaValue(LeftAntena, BadPoints));
+            var leftWheelMultiply = (GetAntenaValue(RightAntena, GoodPoints) -
+                                     0.5f * GetAntenaValue(RightAntena, BadPoints));
+            var rightWheelMultiply = (GetAntenaValue(LeftAntena, GoodPoints) -
+                                      0.5f * GetAntenaValue(LeftAntena, BadPoints));
 
             Debug.LogFormat("{0}   :    {1}", leftWheelMultiply, rightWheelMultiply);
 
@@ -58,9 +60,22 @@ namespace Assets.Scripts
         {
             var antenaPosition = antena.transform.position;
 
-            return pointsHolder
+            var antenaValue = pointsHolder
                 .transform.Cast<Transform>() //foreach
-                .Sum(point => 1 / (point.position - antenaPosition).sqrMagnitude);
+                .Sum(point => NormDistributionLike(point.position, antenaPosition));
+            return antenaValue;
+        }
+
+        private static float GravityForceLike(Vector3 point, Vector3 antenaPosition)
+        {
+            return 1 / (point - antenaPosition).sqrMagnitude;
+        }
+
+        private static float NormDistributionLike(Vector3 point, Vector3 antenaPosition)
+        {
+            var distance = (point - antenaPosition).sqrMagnitude;
+            const int pow = 8; // wyliczenie 2c^2   Math.Pow(2 * 2, 2);
+            return (float)Math.Exp(-distance / pow);
         }
     }
 }
