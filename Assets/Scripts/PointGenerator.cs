@@ -12,19 +12,21 @@ public class PointGenerator : MonoBehaviour
 
     public int BadPointCount;
     public int GoodPointCount;
+
+    public int ArenaSize;
+
     // Use this for initialization
     void Start()
     {
-        Instantiate(GoodPoint, new Vector3(0, 40), Quaternion.identity, GoodPointsHolder.transform);
-
+        var arenaHalfSize = ArenaSize / 2;
         for (int i = 0; i < GoodPointCount; i++)
         {
-            Instantiate(GoodPoint, new Vector3(Random.Range(-50,50), Random.Range(-50, 50)), Quaternion.identity, GoodPointsHolder.transform);
+            Instantiate(GoodPoint, new Vector3(Random.Range(-arenaHalfSize, arenaHalfSize), Random.Range(-arenaHalfSize, arenaHalfSize)), Quaternion.identity, GoodPointsHolder.transform);
         }
 
         for (int i = 0; i < BadPointCount; i++)
         {
-            Instantiate(BadPoint, new Vector3(Random.Range(-50,50), Random.Range(-50, 50)), Quaternion.identity, BadPointsHolder.transform);
+            Instantiate(BadPoint, new Vector3(Random.Range(-arenaHalfSize, arenaHalfSize), Random.Range(-arenaHalfSize, arenaHalfSize)), Quaternion.identity, BadPointsHolder.transform);
         }
     }
 
