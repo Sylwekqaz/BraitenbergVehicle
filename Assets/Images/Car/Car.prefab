@@ -21,6 +21,7 @@ GameObject:
   - 4: {fileID: 4000013053834502}
   - 212: {fileID: 212000013201406568}
   - 50: {fileID: 50000010930966244}
+  - 233: {fileID: 233000011666072070}
   m_Layer: 0
   m_Name: LeftWheel
   m_TagString: Untagged
@@ -39,6 +40,21 @@ GameObject:
   - 212: {fileID: 212000013568951376}
   m_Layer: 0
   m_Name: Body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000011478273488
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000010969799270}
+  m_Layer: 0
+  m_Name: RightAntenaSensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104,6 +120,7 @@ GameObject:
   - 4: {fileID: 4000012888624182}
   - 212: {fileID: 212000012692549152}
   - 50: {fileID: 50000010356376230}
+  - 233: {fileID: 233000012517116270}
   m_Layer: 0
   m_Name: RightWheel
   m_TagString: Untagged
@@ -111,6 +128,47 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000013768421788
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000011558824668}
+  m_Layer: 0
+  m_Name: LeftAntenaSensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000010969799270
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011478273488}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.063, z: 0}
+  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000012430963658}
+  m_RootOrder: 0
+--- !u!4 &4000011558824668
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013768421788}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.005, y: 0.06500006, z: 0}
+  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000012806097322}
+  m_RootOrder: 0
 --- !u!4 &4000012430963658
 Transform:
   m_ObjectHideFlags: 1
@@ -118,10 +176,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012746024418}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.112, y: 0.283, z: -0.1}
+  m_LocalPosition: {x: 0.112, y: 0.283, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 4000010969799270}
   m_Father: {fileID: 4000012515171142}
   m_RootOrder: 0
 --- !u!4 &4000012515171142
@@ -149,10 +208,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012906112968}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.114, y: 0.281, z: -0.1}
+  m_LocalPosition: {x: -0.114, y: 0.281, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 4000011558824668}
   m_Father: {fileID: 4000012515171142}
   m_RootOrder: 1
 --- !u!4 &4000012888624182
@@ -270,11 +330,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 027d2b514fc4683438959ac313586b4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
+  Speed: 20
   LeftWheel: {fileID: 1000010388532040}
   RightWheel: {fileID: 1000012971344336}
-  LeftAntena: {fileID: 1000012906112968}
-  RightAntena: {fileID: 1000012746024418}
+  LeftAntena: {fileID: 1000013768421788}
+  RightAntena: {fileID: 1000011478273488}
+  BadPoints: {fileID: 0}
+  GoodPoints: {fileID: 0}
 --- !u!212 &212000012217096978
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -440,3 +502,49 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!233 &233000011666072070
+HingeJoint2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010388532040}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 50000010299198462}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: -0.337, y: -0.163}
+  m_UseMotor: 0
+  m_Motor:
+    m_MotorSpeed: 0
+    m_MaximumMotorForce: 10000
+  m_UseLimits: 1
+  m_AngleLimits:
+    m_LowerAngle: 0
+    m_UpperAngle: 0
+--- !u!233 &233000012517116270
+HingeJoint2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012971344336}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 50000010299198462}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0.34, y: -0.158}
+  m_UseMotor: 0
+  m_Motor:
+    m_MotorSpeed: 0
+    m_MaximumMotorForce: 10000
+  m_UseLimits: 1
+  m_AngleLimits:
+    m_LowerAngle: 0
+    m_UpperAngle: 0

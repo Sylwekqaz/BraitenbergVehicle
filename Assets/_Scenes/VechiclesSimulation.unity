@@ -149,8 +149,8 @@ MonoBehaviour:
   BadPointsHolder: {fileID: 173164394}
   GoodPoint: {fileID: 1000011394888264, guid: d1b1e3e3591f6364a8f3361aed608232, type: 2}
   BadPoint: {fileID: 1000011917877974, guid: 87b1caa9000eec24eabff8b2611d6ba6, type: 2}
-  BadPointCount: 10
-  GoodPointCount: 10
+  BadPointCount: 200
+  GoodPointCount: 200
 --- !u!4 &194920341
 Transform:
   m_ObjectHideFlags: 0
@@ -325,6 +325,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000011801672918, guid: 29441e43cb9c01a459bf0893fee1ad2a,
+        type: 2}
+      propertyPath: BadPoints
+      value: 
+      objectReference: {fileID: 173164394}
+    - target: {fileID: 114000011801672918, guid: 29441e43cb9c01a459bf0893fee1ad2a,
+        type: 2}
+      propertyPath: GoodPoints
+      value: 
+      objectReference: {fileID: 410868213}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29441e43cb9c01a459bf0893fee1ad2a, type: 2}
   m_IsPrefabParent: 0
@@ -411,6 +421,7 @@ GameObject:
   - 124: {fileID: 1169312849}
   - 92: {fileID: 1169312848}
   - 81: {fileID: 1169312847}
+  - 114: {fileID: 1169312852}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -459,7 +470,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -479,13 +490,25 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1169312846}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1169312852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1169312846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52d81d32f98066448907f1713938e442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 1700466621}
 --- !u!1 &1211351686
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,6 +552,11 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 100, y: 1}
+--- !u!1 &1700466621 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012752139522, guid: 29441e43cb9c01a459bf0893fee1ad2a,
+    type: 2}
+  m_PrefabInternal: {fileID: 339183550}
 --- !u!1 &1857016241
 GameObject:
   m_ObjectHideFlags: 0

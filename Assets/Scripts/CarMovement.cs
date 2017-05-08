@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -35,7 +37,7 @@ namespace Assets.Scripts
 
             Debug.LogFormat("{0}   :    {1}", leftWheelMultiply, rightWheelMultiply);
 
-            LeftWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed* leftWheelMultiply;
+            LeftWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed * leftWheelMultiply;
             RightWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed * rightWheelMultiply;
         }
 
