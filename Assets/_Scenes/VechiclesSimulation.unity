@@ -126,6 +126,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 194920341}
+  - 114: {fileID: 194920340}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -133,6 +134,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &194920340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 194920339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22cb6dcb58a2ef74284090e8ea97e44e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &194920341
 Transform:
   m_ObjectHideFlags: 0
