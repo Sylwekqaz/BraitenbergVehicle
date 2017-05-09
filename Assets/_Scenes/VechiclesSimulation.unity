@@ -601,9 +601,9 @@ MonoBehaviour:
   BadPointsHolder: {fileID: 173164394}
   GoodPoint: {fileID: 1000011394888264, guid: d1b1e3e3591f6364a8f3361aed608232, type: 2}
   BadPoint: {fileID: 1000011917877974, guid: 87b1caa9000eec24eabff8b2611d6ba6, type: 2}
-  BadPointCount: 150
+  BadPointCount: 200
   GoodPointCount: 200
-  ArenaSize: 75
+  ArenaSize: 100
 --- !u!1 &1930159414
 GameObject:
   m_ObjectHideFlags: 0
