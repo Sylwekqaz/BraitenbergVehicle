@@ -248,7 +248,7 @@ GameObject:
   - 61: {fileID: 240975989}
   m_Layer: 0
   m_Name: RightWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -275,7 +275,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -329,6 +329,10 @@ Prefab:
       propertyPath: GoodPoints
       value: 
       objectReference: {fileID: 410868213}
+    - target: {fileID: 1000012752139522, guid: 29441e43cb9c01a459bf0893fee1ad2a, type: 2}
+      propertyPath: m_Name
+      value: Car
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29441e43cb9c01a459bf0893fee1ad2a, type: 2}
   m_IsPrefabParent: 0
@@ -371,7 +375,7 @@ GameObject:
   - 61: {fileID: 816334791}
   m_Layer: 0
   m_Name: LeftWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -398,7 +402,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -514,7 +518,7 @@ GameObject:
   - 61: {fileID: 1211351688}
   m_Layer: 0
   m_Name: BottomWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -541,7 +545,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -597,7 +601,7 @@ MonoBehaviour:
   BadPointsHolder: {fileID: 173164394}
   GoodPoint: {fileID: 1000011394888264, guid: d1b1e3e3591f6364a8f3361aed608232, type: 2}
   BadPoint: {fileID: 1000011917877974, guid: 87b1caa9000eec24eabff8b2611d6ba6, type: 2}
-  BadPointCount: 200
+  BadPointCount: 150
   GoodPointCount: 200
   ArenaSize: 75
 --- !u!1 &1930159414
@@ -611,7 +615,7 @@ GameObject:
   - 61: {fileID: 1930159416}
   m_Layer: 0
   m_Name: TopWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -638,7 +642,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2

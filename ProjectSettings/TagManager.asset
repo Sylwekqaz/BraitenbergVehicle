@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GoodPoint
   - BadPoint
+  - Wall
   layers:
   - Default
   - TransparentFX
