@@ -31,7 +31,7 @@ namespace Events
             }
         }
 
-        void Init()
+        private void Init()
         {
             if (_eventDictionary == null)
             {

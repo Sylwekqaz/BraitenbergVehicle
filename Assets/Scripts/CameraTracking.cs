@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class CameraTracking : MonoBehaviour
 {
@@ -7,13 +6,13 @@ public class CameraTracking : MonoBehaviour
     private Vector3 _offset;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         _offset = transform.position - Target.transform.position;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         transform.position = Target.transform.position + _offset;
     }

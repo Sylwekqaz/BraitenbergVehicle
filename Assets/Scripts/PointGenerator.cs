@@ -1,6 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
+using UnityEngine;
 using Events;
+using Random = UnityEngine.Random;
 
 public class PointGenerator : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class PointGenerator : MonoBehaviour
     public int ArenaSize;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         for (int i = 0; i < GoodPointCount; i++)
         {
@@ -32,17 +33,27 @@ public class PointGenerator : MonoBehaviour
 
     private void AddBadPoint()
     {
-        AddPoint(BadPoint);
+        AddPoint(PointType.Bad);
     }
 
     private void AddGoodPoint()
     {
-        AddPoint(GoodPoint);
+        AddPoint(PointType.Good);
     }
 
-    private void AddPoint(GameObject pointType)
+    private void AddPoint(PointType pointType)
     {
-        Instantiate(pointType, GetRandomPosition(), Quaternion.identity, GoodPointsHolder.transform);
+        switch (pointType)
+        {
+            case PointType.Good:
+                Instantiate(GoodPoint, GetRandomPosition(), Quaternion.identity, GoodPointsHolder.transform);
+                break;
+            case PointType.Bad:
+                Instantiate(BadPoint, GetRandomPosition(), Quaternion.identity, BadPointsHolder.transform);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException("pointType", pointType, null);
+        }
     }
 
     private Vector3 GetRandomPosition()
@@ -52,22 +63,26 @@ public class PointGenerator : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
     }
 
 
-    void OnEnable()
+    private void OnEnable()
     {
         EventManager.StartListening("GoodPointCollected", AddGoodPoint);
         EventManager.StartListening("BadPointCollected", AddBadPoint);
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         EventManager.StopListening("GoodPointCollected", AddGoodPoint);
         EventManager.StopListening("BadPointCollected", AddBadPoint);
     }
 
-
+    private enum PointType
+    {
+        Good,
+        Bad,
+    }
 }
