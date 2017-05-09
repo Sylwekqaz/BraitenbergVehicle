@@ -329,10 +329,6 @@ Prefab:
       propertyPath: GoodPoints
       value: 
       objectReference: {fileID: 410868213}
-    - target: {fileID: 1000012752139522, guid: 29441e43cb9c01a459bf0893fee1ad2a, type: 2}
-      propertyPath: m_Name
-      value: Car
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29441e43cb9c01a459bf0893fee1ad2a, type: 2}
   m_IsPrefabParent: 0
