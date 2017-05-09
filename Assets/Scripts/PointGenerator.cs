@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Events;
 
 public class PointGenerator : MonoBehaviour
 {
@@ -18,20 +19,55 @@ public class PointGenerator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        var arenaHalfSize = ArenaSize / 2;
         for (int i = 0; i < GoodPointCount; i++)
         {
-            Instantiate(GoodPoint, new Vector3(Random.Range(-arenaHalfSize, arenaHalfSize), Random.Range(-arenaHalfSize, arenaHalfSize)), Quaternion.identity, GoodPointsHolder.transform);
+            AddGoodPoint();
         }
 
         for (int i = 0; i < BadPointCount; i++)
         {
-            Instantiate(BadPoint, new Vector3(Random.Range(-arenaHalfSize, arenaHalfSize), Random.Range(-arenaHalfSize, arenaHalfSize)), Quaternion.identity, BadPointsHolder.transform);
+            AddBadPoint();
         }
+    }
+
+    private void AddBadPoint()
+    {
+        AddPoint(BadPoint);
+    }
+
+    private void AddGoodPoint()
+    {
+        AddPoint(GoodPoint);
+    }
+
+    private void AddPoint(GameObject pointType)
+    {
+        Instantiate(pointType, GetRandomPosition(), Quaternion.identity, GoodPointsHolder.transform);
+    }
+
+    private Vector3 GetRandomPosition()
+    {
+        var arenaHalfSize = ArenaSize / 2;
+        return new Vector3(Random.Range(-arenaHalfSize, arenaHalfSize), Random.Range(-arenaHalfSize, arenaHalfSize));
     }
 
     // Update is called once per frame
     void Update()
     {
     }
+
+
+    void OnEnable()
+    {
+        EventManager.StartListening("GoodPointCollected", AddGoodPoint);
+        EventManager.StartListening("BadPointCollected", AddBadPoint);
+    }
+
+    void OnDisable()
+    {
+        EventManager.StopListening("GoodPointCollected", AddGoodPoint);
+        EventManager.StopListening("BadPointCollected", AddBadPoint);
+    }
+
+
 }
