@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Events;
 using UnityEditor;
 using UnityEngine;
 
@@ -25,6 +26,7 @@ namespace Assets.Scripts
         {
             if (collision.gameObject.CompareTag("GoodPoint"))
             {
+                EventManager.TriggerEvent("GoodPointCollected");
                 Points++;
                 Destroy(collision.gameObject);
             }
@@ -32,6 +34,7 @@ namespace Assets.Scripts
 
             if (collision.gameObject.CompareTag("BadPoint"))
             {
+                EventManager.TriggerEvent("BadPointCollected");
                 Points--;
                 Destroy(collision.gameObject);
             }
@@ -62,7 +65,7 @@ namespace Assets.Scripts
 
             var antenaValue = pointsHolder
                 .transform.Cast<Transform>() //foreach
-                .Sum(point => NormDistributionLike(point.position, antenaPosition));
+                .Sum(point => GravityForceLike(point.position, antenaPosition));
             return antenaValue;
         }
 
