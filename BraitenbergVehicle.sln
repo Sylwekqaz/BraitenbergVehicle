@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BraitenbergVehicle", "Brait
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralLogic", "NeuralLogic\NeuralLogic.csproj", "{DB28E2C8-377F-49C3-A608-7019D2EE6557}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralLogicTest", "NeuralLogicTest\NeuralLogicTest.csproj", "{1822F5FE-56A9-4F67-85D3-1F0823BAA1A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{DB28E2C8-377F-49C3-A608-7019D2EE6557}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB28E2C8-377F-49C3-A608-7019D2EE6557}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB28E2C8-377F-49C3-A608-7019D2EE6557}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1822F5FE-56A9-4F67-85D3-1F0823BAA1A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1822F5FE-56A9-4F67-85D3-1F0823BAA1A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1822F5FE-56A9-4F67-85D3-1F0823BAA1A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1822F5FE-56A9-4F67-85D3-1F0823BAA1A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
