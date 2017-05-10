@@ -57,6 +57,7 @@
     <Compile Include="CarNeuralBechavior\CarNeuralNet.cs" />
     <Compile Include="CarNeuralBechavior\CarOutputValues.cs" />
     <Compile Include="Genetics\FloatRecombination.cs" />
+    <Compile Include="Genetics\MatrixRecombination.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

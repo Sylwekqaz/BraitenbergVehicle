@@ -2,6 +2,7 @@
 using MathNet.Numerics.Distributions;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Single;
+using NeuralLogic.Genetics;
 
 namespace NeuralLogic.CarNeuralBechavior
 {
@@ -37,6 +38,20 @@ namespace NeuralLogic.CarNeuralBechavior
         {
             var matrix = DenseMatrix.Build.Random(6, 2, new Normal(1, 0.5));
             return new CarNeuralNet(matrix);
+        }
+
+        public static CarNeuralNet GetDefaultMutatedNet()
+        {
+            var matrix = DenseMatrix.OfArray(new[,]
+            {
+                {0, 0, 1, -0.5f, 0, 0},
+                {1, -0.5f, 0, 0, 0, 0,}
+            });
+
+            var recombined = MatrixRecombination.Recombine(matrix,matrix,0.1f);
+
+
+            return new CarNeuralNet(recombined.Transpose());
         }
     }
 }
