@@ -3,7 +3,7 @@ using MathNet.Numerics.LinearAlgebra;
 
 namespace NeuralLogic.Genetics
 {
-    public class MatrixRecombination
+    public static class MatrixRecombination
     {
         public static Matrix<float> Recombine(Matrix<float> father, Matrix<float> mother, float sigma = 0.5f)
         {

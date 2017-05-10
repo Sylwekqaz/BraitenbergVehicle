@@ -21,7 +21,11 @@ namespace NeuralLogic.CarNeuralBechavior
 
         public CarOutputValues RunNeuralNet(CarInputValues inputValues)
         {
-            return (CarOutputValues) ((Vector<float>) inputValues * Weights);
+            var output = (Vector<float>) inputValues * Weights;
+            var absoluteMaximum = output.AbsoluteMaximum();
+            output /= absoluteMaximum;
+
+            return (CarOutputValues) output;
         }
 
         public static CarNeuralNet GetDefaultNet()
@@ -42,16 +46,7 @@ namespace NeuralLogic.CarNeuralBechavior
 
         public static CarNeuralNet GetDefaultMutatedNet()
         {
-            var matrix = DenseMatrix.OfArray(new[,]
-            {
-                {0, 0, 1, -0.5f, 0, 0},
-                {1, -0.5f, 0, 0, 0, 0,}
-            });
-
-            var recombined = MatrixRecombination.Recombine(matrix,matrix,0.1f);
-
-
-            return new CarNeuralNet(recombined.Transpose());
+            return CarNeuralNetRecombine.Recombine(GetDefaultNet(), GetRandomNet());
         }
     }
 }
