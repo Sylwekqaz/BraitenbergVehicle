@@ -62,7 +62,7 @@ public class CarMovement : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        _neuralNet = CarNeuralNet.GetDefaultNet();
+        _neuralNet = CarNeuralNet.GetDefaultMutatedNet(0.05f);
     }
 
     // Update is called once per frame
