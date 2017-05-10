@@ -72,7 +72,7 @@ public class CarMovement : MonoBehaviour
         var o = _neuralNet.RunNeuralNet(inputValues);
 
 
-        Debug.LogFormat("{0}   :    {1}", o.LeftWheelMultiplier, o.RightWheelMultiplier);
+//        Debug.LogFormat("{0}   :    {1}", o.LeftWheelMultiplier, o.RightWheelMultiplier);
 
         LeftWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed * o.LeftWheelMultiplier;
         RightWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed * o.RightWheelMultiplier;
