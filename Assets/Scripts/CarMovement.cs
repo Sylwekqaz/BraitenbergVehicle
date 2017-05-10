@@ -53,6 +53,10 @@ public class CarMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Wall"))
         {
             transform.position = Vector3.zero;
+            EventManager.Instance.Publish(new WallCollided()
+            {
+                Sender = gameObject
+            });
         }
     }
 
