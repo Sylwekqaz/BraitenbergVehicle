@@ -51,6 +51,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarNeurarNetRecombineTest.cs" />
     <Compile Include="FloatRecombinationTest.cs" />
     <Compile Include="MatrixRecombinationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

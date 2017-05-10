@@ -44,9 +44,9 @@ namespace NeuralLogic.CarNeuralBechavior
             return new CarNeuralNet(matrix);
         }
 
-        public static CarNeuralNet GetDefaultMutatedNet()
+        public static CarNeuralNet GetDefaultMutatedNet(float sigma = 0.03f)
         {
-            return CarNeuralNetRecombine.Recombine(GetDefaultNet(), GetRandomNet());
+            return CarNeuralNetRecombine.Recombine(GetDefaultNet(), GetDefaultNet(),sigma);
         }
     }
 }
