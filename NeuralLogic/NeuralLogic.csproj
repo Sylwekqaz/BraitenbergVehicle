@@ -59,7 +59,9 @@
     <Compile Include="Genetics\CarNeuralNetRecombine.cs" />
     <Compile Include="Genetics\FloatRecombination.cs" />
     <Compile Include="Genetics\MatrixRecombination.cs" />
+    <Compile Include="Infrastructure\EventManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Infrastructure\TinyMessenger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
