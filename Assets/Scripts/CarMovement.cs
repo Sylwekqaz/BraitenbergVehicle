@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Events;
+using NeuralLogic;
 using UnityEngine;
 
 public class CarMovement : MonoBehaviour
@@ -17,6 +18,7 @@ public class CarMovement : MonoBehaviour
 
     public int Points;
 
+    private CarNeuralNet _neuralNet; 
 
     // OnTriggerEnter2D is called when the Collider2D other enters the trigger (2D physics only)
     private void OnTriggerEnter2D(Collider2D collision)
@@ -45,21 +47,34 @@ public class CarMovement : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        _neuralNet = new CarNeuralNet();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        var leftWheelMultiply = (GetAntenaValue(RightAntena, GoodPoints) -
-                                 0.5f * GetAntenaValue(RightAntena, BadPoints));
-        var rightWheelMultiply = (GetAntenaValue(LeftAntena, GoodPoints) -
-                                  0.5f * GetAntenaValue(LeftAntena, BadPoints));
+        var inputValues = CollectValues();
+        var o = _neuralNet.RunNeuralNet(inputValues);
 
-        Debug.LogFormat("{0}   :    {1}", leftWheelMultiply, rightWheelMultiply);
 
-        LeftWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed * leftWheelMultiply;
-        RightWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed * rightWheelMultiply;
+        Debug.LogFormat("{0}   :    {1}", o.LeftWheelMultiplier, o.RightWheelMultiplier);
+
+        LeftWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed * o.LeftWheelMultiplier;
+        RightWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed * o.RightWheelMultiplier;
     }
+
+    private CarInputValues CollectValues()
+    {
+        return new CarInputValues()
+        {
+            LeftAntenaGoodSignal = GetAntenaValue(LeftAntena, GoodPoints),
+            LeftAntenaBadSignal = GetAntenaValue(LeftAntena, BadPoints),
+            RightAntenaGoodSignal = GetAntenaValue(RightAntena, GoodPoints),
+            RightAntenaBadSignal = GetAntenaValue(RightAntena, BadPoints),
+            BatteryLevel = Points,
+        };
+    }
+
 
     private float GetAntenaValue(GameObject antena, GameObject pointsHolder)
     {
