@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using Events;
+using Models;
 using NeuralLogic;
 using NeuralLogic.CarNeuralBechavior;
+using NeuralLogic.Infrastructure;
 using UnityEngine;
 
 public class CarMovement : MonoBehaviour
@@ -26,17 +28,26 @@ public class CarMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("GoodPoint"))
         {
-            EventManager.TriggerEvent("GoodPointCollected");
+            EventManager.Instance.Publish(new PointCollected()
+            {
+               PointType = PointType.Good,
+               Location = collision.gameObject.transform.position,
+               PointObject = collision.gameObject
+            });
             Points++;
-            Destroy(collision.gameObject);
         }
 
 
         if (collision.gameObject.CompareTag("BadPoint"))
         {
-            EventManager.TriggerEvent("BadPointCollected");
+            EventManager.Instance.Publish(new PointCollected()
+            {
+                PointType = PointType.Bad,
+                Location = collision.gameObject.transform.position,
+                PointObject = collision.gameObject
+            });
+
             Points--;
-            Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.CompareTag("Wall"))

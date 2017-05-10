@@ -1,11 +1,13 @@
 ﻿using System;
-using UnityEngine;
 using Events;
+using Models;
+using NeuralLogic.Infrastructure;
+using TinyMessenger;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class PointGenerator : MonoBehaviour
 {
-
     public GameObject GoodPointsHolder;
     public GameObject BadPointsHolder;
 
@@ -16,29 +18,20 @@ public class PointGenerator : MonoBehaviour
     public int GoodPointCount;
 
     public int ArenaSize;
+    private TinyMessageSubscriptionToken _eventToken;
 
     // Use this for initialization
     private void Start()
     {
         for (int i = 0; i < GoodPointCount; i++)
         {
-            AddGoodPoint();
+            AddPoint(PointType.Good);
         }
 
         for (int i = 0; i < BadPointCount; i++)
         {
-            AddBadPoint();
+            AddPoint(PointType.Bad);
         }
-    }
-
-    private void AddBadPoint()
-    {
-        AddPoint(PointType.Bad);
-    }
-
-    private void AddGoodPoint()
-    {
-        AddPoint(PointType.Good);
     }
 
     private void AddPoint(PointType pointType)
@@ -70,19 +63,15 @@ public class PointGenerator : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening("GoodPointCollected", AddGoodPoint);
-        EventManager.StartListening("BadPointCollected", AddBadPoint);
+        _eventToken = EventManager.Instance.Subscribe<PointCollected>((e) =>
+        {
+            Destroy(e.PointObject);
+            AddPoint(e.PointType);
+        });
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening("GoodPointCollected", AddGoodPoint);
-        EventManager.StopListening("BadPointCollected", AddBadPoint);
-    }
-
-    private enum PointType
-    {
-        Good,
-        Bad,
+        EventManager.Instance.Unsubscribe<PointCollected>(_eventToken);
     }
 }
