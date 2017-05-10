@@ -1,6 +1,6 @@
 ﻿using Troschuetz.Random;
 
-namespace NeuralLogic
+namespace NeuralLogic.Genetics
 {
     public static class FloatRecombination
     {

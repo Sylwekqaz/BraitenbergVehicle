@@ -2,6 +2,7 @@
 using System.Linq;
 using Events;
 using NeuralLogic;
+using NeuralLogic.CarNeuralBechavior;
 using UnityEngine;
 
 public class CarMovement : MonoBehaviour
@@ -47,7 +48,7 @@ public class CarMovement : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        _neuralNet = new CarNeuralNet();
+        _neuralNet = CarNeuralNet.GetDefaultNet();
     }
 
     // Update is called once per frame

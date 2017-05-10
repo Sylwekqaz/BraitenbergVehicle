@@ -53,8 +53,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarNeuralNet.cs" />
-    <Compile Include="FloatRecombination.cs" />
+    <Compile Include="CarNeuralBechavior\CarInputValues.cs" />
+    <Compile Include="CarNeuralBechavior\CarNeuralNet.cs" />
+    <Compile Include="CarNeuralBechavior\CarOutputValues.cs" />
+    <Compile Include="Genetics\FloatRecombination.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
