@@ -1,5 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using Events;
+using NeuralLogic.Infrastructure;
+using UnityEngine;
 using TinyMessenger;
+using Random = UnityEngine.Random;
 
 public class CarsGenerator : MonoBehaviour
 {
@@ -10,6 +14,7 @@ public class CarsGenerator : MonoBehaviour
 
     public GameObject BadPoints;
     public GameObject GoodPoints;
+    private TinyMessageSubscriptionToken _eventToken;
 
     // Use this for initialization
     void Start()
@@ -39,5 +44,20 @@ public class CarsGenerator : MonoBehaviour
     {
     }
 
-    
+    private void OnEnable()
+    {
+        _eventToken = EventManager.Instance.Subscribe<BatteryDrained>(CarBatteryDrainedEvent);
+    }
+
+    private void CarBatteryDrainedEvent(BatteryDrained batteryDrained)
+    {
+        Destroy(batteryDrained.Sender);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Instance.Unsubscribe<BatteryDrained>(_eventToken);
+    }
+
+
 }
