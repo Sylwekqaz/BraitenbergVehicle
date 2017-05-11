@@ -669,7 +669,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CarsHolder: {fileID: 1011782119}
-  period: 0.1
+  DampTime: 0.15
+  Period: 5
+  SnapDistance: 2
 --- !u!1 &1211351686
 GameObject:
   m_ObjectHideFlags: 0
