@@ -23,9 +23,9 @@ public class RankingGenerator : MonoBehaviour
 	    CarHolder.transform
             .Cast<Transform>()
             .Select(t => t.gameObject.GetComponent<CarMovement>())
-            .OrderByDescending(m => m.Points)
+            .OrderByDescending(m => m.BatteryLevel)
             .ToList()
-            .ForEach(m => builder.AppendFormat("Car: {0}\n", m.Points));
+            .ForEach(m => builder.AppendFormat("Car: {0:P0} \n", m.BatteryLevel));
 
         GetComponent<Text>().text = builder.ToString();
 	}

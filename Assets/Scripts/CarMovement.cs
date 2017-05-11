@@ -2,7 +2,6 @@
 using System.Linq;
 using Events;
 using Models;
-using NeuralLogic;
 using NeuralLogic.CarNeuralBechavior;
 using NeuralLogic.Infrastructure;
 using UnityEngine;
@@ -19,9 +18,11 @@ public class CarMovement : MonoBehaviour
     public GameObject BadPoints;
     public GameObject GoodPoints;
 
-    public int Points;
+    private float _batteryLevel = 1;
+    public float BatteryLevel { get { return _batteryLevel; } }
 
-    private CarNeuralNet _neuralNet; 
+    public float BatteryDrainPerSecond = 0.1f;
+    private CarNeuralNet _neuralNet;
 
     // OnTriggerEnter2D is called when the Collider2D other enters the trigger (2D physics only)
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,7 +35,7 @@ public class CarMovement : MonoBehaviour
                Location = collision.gameObject.transform.position,
                PointObject = collision.gameObject
             });
-            Points++;
+            ChangeBatteryLevel(0.1f);
         }
 
 
@@ -47,7 +48,7 @@ public class CarMovement : MonoBehaviour
                 PointObject = collision.gameObject
             });
 
-            Points--;
+            ChangeBatteryLevel(-0.1f);
         }
     }
 
@@ -66,6 +67,8 @@ public class CarMovement : MonoBehaviour
 
         LeftWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed * o.LeftWheelMultiplier;
         RightWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed * o.RightWheelMultiplier;
+
+        ChangeBatteryLevel(-BatteryDrainPerSecond * Time.deltaTime);
     }
 
     private CarInputValues CollectValues()
@@ -76,7 +79,7 @@ public class CarMovement : MonoBehaviour
             LeftAntenaBadSignal = GetAntenaValue(LeftAntena, BadPoints),
             RightAntenaGoodSignal = GetAntenaValue(RightAntena, GoodPoints),
             RightAntenaBadSignal = GetAntenaValue(RightAntena, BadPoints),
-            BatteryLevel = Points,
+            BatteryLevel = _batteryLevel,
         };
     }
 
@@ -102,4 +105,18 @@ public class CarMovement : MonoBehaviour
         const int pow = 8; // wyliczenie 2c^2   Math.Pow(2 * 2, 2);
         return (float)Math.Exp(-distance / pow);
     }
+
+    private void ChangeBatteryLevel(float amount)
+    {
+        _batteryLevel = (_batteryLevel + amount).Clamp(0, 1);
+        if (_batteryLevel==0)
+        {
+            EventManager.Instance.Publish(new BatteryDrained()
+            {
+                Sender = gameObject,
+            });
+        }
+    }
+
+    
 }

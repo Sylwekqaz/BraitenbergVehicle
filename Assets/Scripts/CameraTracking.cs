@@ -31,7 +31,7 @@ public class CameraTracking : MonoBehaviour
             _nextActionTime += Period;
             _target = CarsHolder.transform
                 .Cast<Transform>()
-                .OrderByDescending(o => o.GetComponent<CarMovement>().Points)
+                .OrderByDescending(o => o.GetComponent<CarMovement>().BatteryLevel)
                 .First();
 
             _switchingMode = true;
