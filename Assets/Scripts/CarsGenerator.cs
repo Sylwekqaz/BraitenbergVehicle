@@ -1,7 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using Events;
-using NeuralLogic.Infrastructure;
 using TinyMessenger;
 
 public class CarsGenerator : MonoBehaviour
@@ -11,7 +8,6 @@ public class CarsGenerator : MonoBehaviour
     public int ArenaSize;
 
 
-    private TinyMessageSubscriptionToken _eventToken;
     public GameObject BadPoints;
     public GameObject GoodPoints;
 
@@ -27,7 +23,7 @@ public class CarsGenerator : MonoBehaviour
     private void AddPoint()
     {
         var instance = Instantiate(CarPrefab, GetRandomPosition(), Quaternion.identity, transform);
-        var carMovement = (instance as GameObject).GetComponent<CarMovement>();
+        var carMovement = ((GameObject) instance).GetComponent<CarMovement>();
         carMovement.BadPoints = BadPoints;
         carMovement.GoodPoints = GoodPoints;
     }
@@ -43,18 +39,5 @@ public class CarsGenerator : MonoBehaviour
     {
     }
 
-    private void OnEnable()
-    {
-        _eventToken = EventManager.Instance.Subscribe<WallCollided>(OnCarCollideWall);
-    }
-
-    private void OnDisable()
-    {
-        EventManager.Instance.Unsubscribe<PointCollected>(_eventToken);
-    }
-
-    private void OnCarCollideWall(WallCollided @event)
-    {
-        @event.Sender.transform.position = GetRandomPosition();
-    }
+    
 }

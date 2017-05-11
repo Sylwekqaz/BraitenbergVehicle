@@ -49,14 +49,6 @@ public class CarMovement : MonoBehaviour
 
             Points--;
         }
-
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            EventManager.Instance.Publish(new WallCollided()
-            {
-                Sender = gameObject
-            });
-        }
     }
 
     // Use this for initialization
@@ -71,8 +63,6 @@ public class CarMovement : MonoBehaviour
         var inputValues = CollectValues();
         var o = _neuralNet.RunNeuralNet(inputValues);
 
-
-        Debug.LogFormat("{0}   :    {1}", o.LeftWheelMultiplier, o.RightWheelMultiplier);
 
         LeftWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed * o.LeftWheelMultiplier;
         RightWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed * o.RightWheelMultiplier;

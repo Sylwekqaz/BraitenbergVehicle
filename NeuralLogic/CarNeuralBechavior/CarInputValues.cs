@@ -19,7 +19,7 @@ namespace NeuralLogic.CarNeuralBechavior
                 values.RightAntenaGoodSignal,
                 values.RightAntenaBadSignal,
 //                values.BatteryLevel,
-//                1,
+//                1, TODO
                 0, 0
             });
         }
