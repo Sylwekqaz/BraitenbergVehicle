@@ -49,14 +49,6 @@ public class CarMovement : MonoBehaviour
 
             Points--;
         }
-
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            EventManager.Instance.Publish(new WallCollided()
-            {
-                Sender = gameObject
-            });
-        }
     }
 
     // Use this for initialization
