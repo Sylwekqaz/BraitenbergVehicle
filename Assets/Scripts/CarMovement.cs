@@ -19,6 +19,7 @@ public class CarMovement : MonoBehaviour
     public GameObject GoodPoints;
 
     private float _batteryLevel = 1;
+    public int Points;
     public float BatteryLevel { get { return _batteryLevel; } }
 
     public float BatteryDrainPerSecond = 0.1f;
@@ -36,6 +37,7 @@ public class CarMovement : MonoBehaviour
                PointObject = collision.gameObject
             });
             ChangeBatteryLevel(0.1f);
+            Points++;
         }
 
 
@@ -49,6 +51,7 @@ public class CarMovement : MonoBehaviour
             });
 
             ChangeBatteryLevel(-0.1f);
+            Points--;
         }
     }
 

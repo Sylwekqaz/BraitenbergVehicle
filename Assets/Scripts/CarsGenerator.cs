@@ -49,15 +49,14 @@ public class CarsGenerator : MonoBehaviour
         _eventToken = EventManager.Instance.Subscribe<BatteryDrained>(CarBatteryDrainedEvent);
     }
 
-    private void CarBatteryDrainedEvent(BatteryDrained batteryDrained)
-    {
-        Destroy(batteryDrained.Sender);
-    }
 
     private void OnDisable()
     {
         EventManager.Instance.Unsubscribe<BatteryDrained>(_eventToken);
     }
 
-
+    private void CarBatteryDrainedEvent(BatteryDrained batteryDrained)
+    {
+        Destroy(batteryDrained.Sender);
+    }
 }
