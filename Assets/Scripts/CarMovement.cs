@@ -37,7 +37,7 @@ public class CarMovement : MonoBehaviour
                PointObject = collision.gameObject
             });
             ChangeBatteryLevel(0.1f);
-            Points++;
+            ChangePointValue(true);
         }
 
 
@@ -51,7 +51,7 @@ public class CarMovement : MonoBehaviour
             });
 
             ChangeBatteryLevel(-0.1f);
-            Points--;
+            ChangePointValue(false);
         }
     }
 
@@ -118,6 +118,12 @@ public class CarMovement : MonoBehaviour
                 Sender = gameObject,
             });
         }
+    }
+
+    private void ChangePointValue(bool positive)
+    {
+        Points += positive ? 1 : -1;
+        Points = Math.Max(Points, 0);
     }
 
     
