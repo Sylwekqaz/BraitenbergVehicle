@@ -337,7 +337,7 @@ MonoBehaviour:
   RightAntena: {fileID: 1000011478273488}
   BadPoints: {fileID: 0}
   GoodPoints: {fileID: 0}
-  Points: 0
+  BatteryDrainPerSecond: 0.1
 --- !u!212 &212000012217096978
 SpriteRenderer:
   m_ObjectHideFlags: 1

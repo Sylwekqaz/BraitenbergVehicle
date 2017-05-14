@@ -2,7 +2,6 @@
 using System.Linq;
 using Events;
 using Models;
-using NeuralLogic;
 using NeuralLogic.CarNeuralBechavior;
 using NeuralLogic.Infrastructure;
 using UnityEngine;
@@ -19,9 +18,12 @@ public class CarMovement : MonoBehaviour
     public GameObject BadPoints;
     public GameObject GoodPoints;
 
+    private float _batteryLevel = 1;
     public int Points;
+    public float BatteryLevel { get { return _batteryLevel; } }
 
-    private CarNeuralNet _neuralNet; 
+    public float BatteryDrainPerSecond = 0.1f;
+    public CarNeuralNet NeuralNet;
 
     // OnTriggerEnter2D is called when the Collider2D other enters the trigger (2D physics only)
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,7 +36,8 @@ public class CarMovement : MonoBehaviour
                Location = collision.gameObject.transform.position,
                PointObject = collision.gameObject
             });
-            Points++;
+            ChangeBatteryLevel(0.1f);
+            ChangePointValue(true);
         }
 
 
@@ -47,25 +50,27 @@ public class CarMovement : MonoBehaviour
                 PointObject = collision.gameObject
             });
 
-            Points--;
+            ChangeBatteryLevel(-0.1f);
+            ChangePointValue(false);
         }
     }
 
     // Use this for initialization
     private void Start()
     {
-        _neuralNet = CarNeuralNet.GetDefaultMutatedNet(0.05f);
     }
 
     // Update is called once per frame
     private void Update()
     {
         var inputValues = CollectValues();
-        var o = _neuralNet.RunNeuralNet(inputValues);
+        var o = NeuralNet.RunNeuralNet(inputValues);
 
 
         LeftWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed * o.LeftWheelMultiplier;
         RightWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed * o.RightWheelMultiplier;
+
+        ChangeBatteryLevel(-BatteryDrainPerSecond * Time.deltaTime);
     }
 
     private CarInputValues CollectValues()
@@ -76,7 +81,7 @@ public class CarMovement : MonoBehaviour
             LeftAntenaBadSignal = GetAntenaValue(LeftAntena, BadPoints),
             RightAntenaGoodSignal = GetAntenaValue(RightAntena, GoodPoints),
             RightAntenaBadSignal = GetAntenaValue(RightAntena, BadPoints),
-            BatteryLevel = Points,
+            BatteryLevel = _batteryLevel,
         };
     }
 
@@ -102,4 +107,24 @@ public class CarMovement : MonoBehaviour
         const int pow = 8; // wyliczenie 2c^2   Math.Pow(2 * 2, 2);
         return (float)Math.Exp(-distance / pow);
     }
+
+    private void ChangeBatteryLevel(float amount)
+    {
+        _batteryLevel = (_batteryLevel + amount).Clamp(0, 1);
+        if (_batteryLevel==0)
+        {
+            EventManager.Instance.Publish(new BatteryDrained()
+            {
+                Sender = gameObject,
+            });
+        }
+    }
+
+    private void ChangePointValue(bool positive)
+    {
+        Points += positive ? 1 : -1;
+        Points = Math.Max(Points, 0);
+    }
+
+    
 }

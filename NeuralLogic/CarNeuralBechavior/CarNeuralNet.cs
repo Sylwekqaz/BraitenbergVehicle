@@ -23,7 +23,10 @@ namespace NeuralLogic.CarNeuralBechavior
         {
             var output = (Vector<float>) inputValues * Weights;
             var absoluteMaximum = output.AbsoluteMaximum();
-            output /= absoluteMaximum;
+            if (absoluteMaximum>1)
+            {
+                output /= absoluteMaximum;
+            }
 
             return (CarOutputValues) output;
         }
@@ -40,7 +43,8 @@ namespace NeuralLogic.CarNeuralBechavior
 
         public static CarNeuralNet GetRandomNet()
         {
-            var matrix = DenseMatrix.Build.Random(6, 2, new Normal(1, 0.5));
+            var random = new Random();
+            var matrix = DenseMatrix.Build.Dense(6, 2, (_, __) => (float) (random.NextDouble() * 2) - 1);
             return new CarNeuralNet(matrix);
         }
 
