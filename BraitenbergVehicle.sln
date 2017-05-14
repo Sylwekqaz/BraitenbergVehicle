@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2017
+# Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BraitenbergVehicle", "BraitenbergVehicle.csproj", "{B7FE7DA1-047B-D3E4-BD82-CECB0FDD500F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralLogic", "NeuralLogic\NeuralLogic.csproj", "{DB28E2C8-377F-49C3-A608-7019D2EE6557}"

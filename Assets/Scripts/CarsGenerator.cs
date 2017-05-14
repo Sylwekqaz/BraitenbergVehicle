@@ -25,11 +25,11 @@ public class CarsGenerator : MonoBehaviour
         //AddCar(CarNeuralNet.GetDefaultMutatedNet());
         for (int i = 0; i < CarsCount; i++)
         {
-            AddCar(CarNeuralNet.GetDefaultMutatedNet(0.5f));
+            AddCar(CarNeuralNet.GetDefaultMutatedNet(0.5f),i);
         }
     }
 
-    private void AddCar(CarNeuralNet neuralNet)
+    private void AddCar(CarNeuralNet neuralNet, int playerPrefsIndex=0)
     {
         var instance = Instantiate(CarPrefab, GetRandomPosition(), Quaternion.identity, transform);
         var carMovement = ((GameObject) instance).GetComponent<CarMovement>();
@@ -37,6 +37,7 @@ public class CarsGenerator : MonoBehaviour
         carMovement.NeuralNet = neuralNet;
         carMovement.BadPoints = BadPoints;
         carMovement.GoodPoints = GoodPoints;
+        carMovement.Points = PlayerPrefs.GetInt("car" + playerPrefsIndex + "points");
     }
 
     private Vector3 GetRandomPosition()
@@ -74,5 +75,15 @@ public class CarsGenerator : MonoBehaviour
 
         var sonNet = CarNeuralNetRecombine.Recombine(father.NeuralNet,mother.NeuralNet,0.05f);
         AddCar(sonNet);
+    }
+
+    void OnApplicationQuit()
+    {
+        int index = 0;
+        foreach (Transform car in transform)
+        {
+            PlayerPrefs.SetInt("car"+index+"points",car.gameObject.GetComponent<CarMovement>().Points);
+            index++;
+        }
     }
 }
