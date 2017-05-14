@@ -23,7 +23,7 @@ public class CarMovement : MonoBehaviour
     public float BatteryLevel { get { return _batteryLevel; } }
 
     public float BatteryDrainPerSecond = 0.1f;
-    private CarNeuralNet _neuralNet;
+    public CarNeuralNet NeuralNet;
 
     // OnTriggerEnter2D is called when the Collider2D other enters the trigger (2D physics only)
     private void OnTriggerEnter2D(Collider2D collision)
@@ -58,14 +58,13 @@ public class CarMovement : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        _neuralNet = CarNeuralNet.GetDefaultMutatedNet(0.05f);
     }
 
     // Update is called once per frame
     private void Update()
     {
         var inputValues = CollectValues();
-        var o = _neuralNet.RunNeuralNet(inputValues);
+        var o = NeuralNet.RunNeuralNet(inputValues);
 
 
         LeftWheel.GetComponent<Rigidbody2D>().velocity = transform.up * Speed * o.LeftWheelMultiplier;

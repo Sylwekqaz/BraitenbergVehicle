@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
 using Events;
+using NeuralLogic.CarNeuralBechavior;
+using NeuralLogic.Genetics;
 using NeuralLogic.Infrastructure;
 using UnityEngine;
 using TinyMessenger;
@@ -19,16 +22,19 @@ public class CarsGenerator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //AddCar(CarNeuralNet.GetDefaultMutatedNet());
         for (int i = 0; i < CarsCount; i++)
         {
-            AddPoint();
+            AddCar(CarNeuralNet.GetDefaultMutatedNet(0.5f));
         }
     }
 
-    private void AddPoint()
+    private void AddCar(CarNeuralNet neuralNet)
     {
         var instance = Instantiate(CarPrefab, GetRandomPosition(), Quaternion.identity, transform);
         var carMovement = ((GameObject) instance).GetComponent<CarMovement>();
+
+        carMovement.NeuralNet = neuralNet;
         carMovement.BadPoints = BadPoints;
         carMovement.GoodPoints = GoodPoints;
     }
@@ -58,5 +64,15 @@ public class CarsGenerator : MonoBehaviour
     private void CarBatteryDrainedEvent(BatteryDrained batteryDrained)
     {
         Destroy(batteryDrained.Sender);
+        var cars = transform.Cast<Transform>()
+            .Select(t => t.GetComponent<CarMovement>());
+        var carMovements = cars.ToArray();
+
+
+        var father = carMovements.GetRandomItem(c => c.Points);
+        var mother = carMovements.GetRandomItem(c => c.Points);
+
+        var sonNet = CarNeuralNetRecombine.Recombine(father.NeuralNet,mother.NeuralNet,0.05f);
+        AddCar(sonNet);
     }
 }

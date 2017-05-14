@@ -60,6 +60,7 @@
     <Compile Include="Genetics\FloatRecombination.cs" />
     <Compile Include="Genetics\MatrixRecombination.cs" />
     <Compile Include="Infrastructure\ClampExtension.cs" />
+    <Compile Include="Infrastructure\LinqExtension.cs" />
     <Compile Include="Infrastructure\EventManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\TinyMessenger.cs" />
