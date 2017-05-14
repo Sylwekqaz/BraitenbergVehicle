@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using System.Runtime.InteropServices;
 using Events;
 using NeuralLogic.Infrastructure;
+using TinyMessenger;
 using UnityEngine;
 
 public class CameraTracking : MonoBehaviour
@@ -15,6 +17,7 @@ public class CameraTracking : MonoBehaviour
     private float _nextActionTime;
     private Vector3 _velocity = Vector3.zero;
     private bool _switchingMode;
+    private TinyMessageSubscriptionToken _eventToken;
 
     // Use this for initialization
     private void Start()
@@ -32,7 +35,7 @@ public class CameraTracking : MonoBehaviour
             _nextActionTime += Period;
             var best = CarsHolder.transform
                 .Cast<Transform>()
-                .OrderByDescending(o => o.GetComponent<CarMovement>().BatteryLevel)
+                .OrderByDescending(o => o.GetComponent<CarMovement>().Points)
                 .First();
 
             SetTarget(best);
@@ -63,11 +66,30 @@ public class CameraTracking : MonoBehaviour
     {
         if (target == _target) return;
 
+        Debug.Log(target.GetComponent<CarMovement>().NeuralNet.Weights);
+
         _target = target;
         _switchingMode = true;
         EventManager.Instance.Publish(new CameraTargetChange
         {
             NewTargetCar = target.gameObject,
         });
+    }
+
+    private void OnEnable()
+    {
+        _eventToken = EventManager.Instance.Subscribe<BatteryDrained>(e =>
+        {
+            if (e.Sender == _target.gameObject)
+            {
+                _nextActionTime = Time.time+0.1f;
+            }
+        });
+    }
+
+
+    private void OnDisable()
+    {
+        EventManager.Instance.Unsubscribe<BatteryDrained>(_eventToken);
     }
 }
