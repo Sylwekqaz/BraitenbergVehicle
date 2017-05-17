@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Linq;
 using Events;
+using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Single;
 using NeuralLogic.CarNeuralBechavior;
 using NeuralLogic.Genetics;
 using NeuralLogic.Infrastructure;
+using Newtonsoft.Json;
 using UnityEngine;
 using TinyMessenger;
 using Random = UnityEngine.Random;
@@ -22,14 +25,12 @@ public class CarsGenerator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+            LoadOrGenerateData();
         //AddCar(CarNeuralNet.GetDefaultMutatedNet());
-        for (int i = 0; i < CarsCount; i++)
-        {
-            AddCar(CarNeuralNet.GetDefaultMutatedNet(0.5f));
-        }
+        
     }
 
-    private void AddCar(CarNeuralNet neuralNet)
+    private void AddCar(CarNeuralNet neuralNet, int points = 0)
     {
         var instance = Instantiate(CarPrefab, GetRandomPosition(), Quaternion.identity, transform);
         var carMovement = ((GameObject) instance).GetComponent<CarMovement>();
@@ -37,6 +38,7 @@ public class CarsGenerator : MonoBehaviour
         carMovement.NeuralNet = neuralNet;
         carMovement.BadPoints = BadPoints;
         carMovement.GoodPoints = GoodPoints;
+        carMovement.Points = points;
     }
 
     private Vector3 GetRandomPosition()
@@ -72,7 +74,49 @@ public class CarsGenerator : MonoBehaviour
         var father = carMovements.GetRandomItem(c => c.Points);
         var mother = carMovements.GetRandomItem(c => c.Points);
 
-        var sonNet = CarNeuralNetRecombine.Recombine(father.NeuralNet,mother.NeuralNet,0.05f);
+        var sonNet = CarNeuralNetRecombine.Recombine(father.NeuralNet, mother.NeuralNet, 0.05f);
         AddCar(sonNet);
+    }
+
+    void OnApplicationQuit()
+    {
+        SaveData();
+    }
+
+    private void SaveData()
+    {
+        var array = transform.Cast<Transform>()
+            .Select(t => t.GetComponent<CarMovement>())
+            .Select(c => new SaveModel
+            {
+                Points = c.Points,
+                Weights = c.NeuralNet.Weights.ToArray()
+            })
+            .ToArray();
+
+        PlayerPrefs.SetString("Cars", JsonConvert.SerializeObject(array));
+    }
+    private void LoadOrGenerateData()
+    {
+        var fromJson = JsonConvert.DeserializeObject<SaveModel[]>(PlayerPrefs.GetString("Cars"));
+
+        if (fromJson.Length>1)
+        {
+            foreach (var car in fromJson)
+            {
+                AddCar(new CarNeuralNet(DenseMatrix.OfArray(car.Weights)),car.Points);
+            }
+        }
+
+        for (int i = 0; i < CarsCount; i++)
+        {
+            AddCar(CarNeuralNet.GetDefaultMutatedNet(0.5f), i);
+        }
+    }
+
+    class SaveModel
+    {
+        public int Points { get; set; }
+        public float[,] Weights { get; set; }
     }
 }
