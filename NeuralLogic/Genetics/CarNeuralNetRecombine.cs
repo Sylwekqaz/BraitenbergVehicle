@@ -9,7 +9,7 @@ namespace NeuralLogic.Genetics
     {
         private static readonly TRandom Random = new TRandom();
 
-        public static CarNeuralNet Recombine(CarNeuralNet father,CarNeuralNet mother,float sigma = 0.01f)
+        public static CarNeuralNet Recombine(CarNeuralNet father,CarNeuralNet mother,float sigma = 0.01f , float mutationRate = 0.1f)
         {
             Matrix<float> child = DenseMatrix.Build.Dense(6, 2);
 
@@ -28,7 +28,7 @@ namespace NeuralLogic.Genetics
                 var net = Random.NextBoolean() ? mother.Weights : father.Weights;
                 for (int m = 0; m < pairs.GetLength(1); m++)
                 {
-                    child[pairs[p,m,0], pairs[p,m,1]] = FloatRecombination.Mutation(net[pairs[p, m, 0], pairs[p, m, 1]],sigma);
+                    child[pairs[p,m,0], pairs[p,m,1]] = FloatRecombination.Mutation(net[pairs[p, m, 0], pairs[p, m, 1]],sigma,mutationRate);
                 }
             }
 
