@@ -25,9 +25,8 @@ public class CarsGenerator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-            LoadOrGenerateData();
+        LoadOrGenerateData();
         //AddCar(CarNeuralNet.GetDefaultMutatedNet());
-        
     }
 
     private void AddCar(CarNeuralNet neuralNet, int points = 0)
@@ -92,25 +91,25 @@ public class CarsGenerator : MonoBehaviour
                 Points = c.Points,
                 Weights = c.NeuralNet.Weights.ToArray()
             })
+            .OrderByDescending(m => m.Points)
             .ToArray();
 
         PlayerPrefs.SetString("Cars", JsonConvert.SerializeObject(array));
     }
+
     private void LoadOrGenerateData()
     {
         var fromJson = JsonConvert.DeserializeObject<SaveModel[]>(PlayerPrefs.GetString("Cars"));
 
-        if (fromJson.Length>1)
-        {
-            foreach (var car in fromJson)
-            {
-                AddCar(new CarNeuralNet(DenseMatrix.OfArray(car.Weights)),car.Points);
-            }
-        }
 
-        for (int i = 0; i < CarsCount; i++)
+        fromJson
+            .Take(CarsCount)
+            .ToList()
+            .ForEach(car => AddCar(new CarNeuralNet(DenseMatrix.OfArray(car.Weights)), car.Points));
+
+        while (transform.childCount < CarsCount)
         {
-            AddCar(CarNeuralNet.GetDefaultMutatedNet(0.5f), i);
+            AddCar(CarNeuralNet.GetDefaultMutatedNet(0.5f));
         }
     }
 
