@@ -81,7 +81,7 @@ public class CarMovement : MonoBehaviour
             LeftAntenaBadSignal = GetAntenaValue(LeftAntena, BadPoints),
             RightAntenaGoodSignal = GetAntenaValue(RightAntena, GoodPoints),
             RightAntenaBadSignal = GetAntenaValue(RightAntena, BadPoints),
-            BatteryLevel = _batteryLevel,
+            HungryLevel = 1-_batteryLevel,
         };
     }
 

@@ -8,7 +8,7 @@ namespace NeuralLogic.CarNeuralBechavior
         public float LeftAntenaBadSignal { get; set; }
         public float RightAntenaGoodSignal { get; set; }
         public float RightAntenaBadSignal { get; set; }
-        public float BatteryLevel { get; set; }
+        public float HungryLevel { get; set; }
 
         public static explicit operator Vector<float>(CarInputValues values)
         {
@@ -18,9 +18,8 @@ namespace NeuralLogic.CarNeuralBechavior
                 values.LeftAntenaBadSignal,
                 values.RightAntenaGoodSignal,
                 values.RightAntenaBadSignal,
-//                values.BatteryLevel,
-//                1, TODO
-                0, 0
+                values.HungryLevel,
+                1,
             });
         }
     }
