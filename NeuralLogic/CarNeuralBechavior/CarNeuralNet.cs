@@ -23,10 +23,10 @@ namespace NeuralLogic.CarNeuralBechavior
         {
             var output = (Vector<float>) inputValues * Weights;
             var absoluteMaximum = output.AbsoluteMaximum();
-            if (absoluteMaximum>1)
-            {
+//            if (absoluteMaximum>1)
+//            {
                 output /= absoluteMaximum;
-            }
+//            }
 
             return (CarOutputValues) output;
         }

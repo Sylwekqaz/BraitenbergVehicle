@@ -103,13 +103,13 @@ public class CarsGenerator : MonoBehaviour
 
 
         fromJson
-            .Take(CarsCount)
+            .Take(0)
             .ToList()
             .ForEach(car => AddCar(new CarNeuralNet(DenseMatrix.OfArray(car.Weights)), car.Points));
 
         while (transform.childCount < CarsCount)
         {
-            AddCar(CarNeuralNet.GetDefaultMutatedNet(0.5f));
+            AddCar(CarNeuralNet.GetDefaultMutatedNet(0.1f));
         }
     }
 
